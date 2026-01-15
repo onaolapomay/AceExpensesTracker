@@ -18,10 +18,14 @@ function Hero() {
                 </p>
 
                 <div className='mt-5 flex gap-3'>
-                    <button className='px-6 py-3 rounded-lg bg-black text-white
+                    <motion.button
+                    whileHover={{scale: 1.05 }}
+                    whileTap={{scale: 0.95 }}
+                    transition={{type: 'spring', stiffness: 400 }}
+                    className='px-6 py-3 rounded-lg bg-black text-white
                     font-medium hover:bg-slate-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black'>
                         Get Started
-                    </button>
+                    </motion.button>
 
                     <button className='px-6 py-3 rounded-lg border border-gray-300 text-slate-600 hover:bg-slate-100 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400'>
                         Learn more       
