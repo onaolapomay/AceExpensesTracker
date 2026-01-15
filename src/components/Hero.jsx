@@ -1,8 +1,12 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 function Hero() {
     return (
-        <section className='px-6 max-w-5xl py-24 mx-auto'>
+        <motion.section initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut'}} 
+        className='px-6 max-w-5xl py-24 mx-auto'>
             <div className='max-w-3xl'>
                 <h1 className='text-5xl font-bold text-slate-700 leading-tight'>
                     Track your expenses <br />
@@ -25,7 +29,7 @@ function Hero() {
 
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
 
