@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 function Navbar() {
+    const navigate = useNavigate()
     return (
         <nav className='w-full bg-white border-b border-gray-200'>
             <div className='max-w-7xl mx-auto px-6 flex items-center py-4 justify-between'>
@@ -17,10 +19,14 @@ function Navbar() {
                 </ul>
 
                 <div className='flex items-center gap-4'>
-                    <button className='text-yellow-600 hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700'>
+                    <button 
+                    onClick={() => navigate('/login')}
+                    className='text-yellow-600 hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700'>
                         Login
                     </button>
-                    <button className='bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-2 transition'>
+                    <button
+                    onClick={() => navigate('/signup')}
+                    className='bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-2 transition'>
                         Sign Up
                     </button>
                 </div>

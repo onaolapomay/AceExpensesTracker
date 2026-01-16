@@ -23,10 +23,8 @@ function SignUp() {
     return (
         <div className='min-h-screen flex items-center justify-center bg-slate-100 px-4'>
             <div className='w-full max-w-md text-center bg-white p-8 rounded-2xl shadow-sm'>
-                <h1 className='text-2xl font-bold text-slate-900 mb-2'>Create an account</h1>
-                <p className='text-gray-500 mb-6'>Sign up to get started</p>
                     <h2 className='text-3xl font-bold font-[roboto]' >Create an account</h2>
-                    <p className='mt-2 text-gray-400'>
+                    <p className='mb-2 text-gray-400'>
                         Already have an account?{' '}
               <span
                 onClick={() => navigate('/login')}
@@ -36,7 +34,7 @@ function SignUp() {
               </span>
             </p>
                 <form onSubmit={handleSubmit}>
-                    <div className='relative mb-6'>
+                    <div className='relative mb-4'>
                         <input
                             type="email"
                             placeholder=" "
