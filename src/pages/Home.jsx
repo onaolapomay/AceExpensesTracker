@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Features from '../components/Features'
 import Footer from '../components/Footer'
+import Dashboard from './Dashboard'
 
 function Home() {
     return (
@@ -11,6 +12,7 @@ function Home() {
             <Hero/>
             <Features/>
             <Footer/>
+            <Dashboard/>
         </div>
     )
 }
