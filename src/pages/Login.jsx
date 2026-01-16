@@ -6,6 +6,7 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -38,14 +39,14 @@ return (
                 className='peer
                  w-full font-mono font-semibold
                   bg-transparent border-b
-                   border-red-500 py-2
+                   border-red-500 pt-6 pb-2
                     text-slate-900
                      focus:outline-none
                       focus:border-red-600' required
                  />
 
-                 <label className='absolute left-0 top-2 font-mono font-semibold text-gray-400 text-sm transition-all
-                 peer-placeholder-shown:top-2 
+                 <label className='absolute left-0 top-2 font-mono font-semibold text-gray-400 text-sm transition-all duration-200 ease-out
+                 peer-placeholder-shown:top-2
                  peer-placeholder-shown:text-slate-400
                  peer-placeholder-shown:text-sm
                  peer-focus:-top-3
@@ -63,21 +64,26 @@ return (
 
             <div className='mb-6 relative'>
                 <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     placeholder=""
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className='peer w-full
                     font-mono font-semibold
                     bg-transparent border-b
-                  border-red-500 py-2
+                  border-red-500 pt-6 pb-2
                   text-slate-900
                     focus:outline-none 
                     focus:border-red-600' required
                 />
+                
+                    <button type='button' onClick={() => setShowPassword(!showPassword)}
+                        className='absolute right-0 top-2 text-sm font-semibold text-red-600 hover:text-red-700 transition'>
+                            {showPassword ? 'hide' : 'show'}
+                    </button>
 
                 <label className='absolute left-0 top-2
-                 font-mono font-semibold text-gray-400 text-sm transition-all
+                 font-mono font-semibold text-gray-400 text-sm transition-all duration-200 ease-out
                  peer-placeholder-shown:top-2 
                  peer-placeholder-shown:text-slate-400
                  peer-placeholder-shown:text-sm
