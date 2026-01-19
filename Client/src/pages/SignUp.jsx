@@ -8,15 +8,25 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [error, setError] = useState('');
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setMessage('')
+        setError('')
 
     if (email && password && password === confirmPassword) {
-        navigate('/login');
+        setError('All fields are required')
 
     }
+
+    if (password !== confirmPassword) {
+        setError('Passwords do not match')
+        return
+    }
+
+    navigate('/login')
 }
 
 
