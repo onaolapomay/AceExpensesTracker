@@ -9,25 +9,52 @@ function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setMessage('')
         setError('')
+        setLoading(true)
 
-    if (email && password && password === confirmPassword) {
+    if (!email || !password || !confirmPassword) {
         setError('All fields are required')
+        setLoading(false)
+        return
 
     }
 
     if (password !== confirmPassword) {
         setError('Passwords do not match')
+        setLoading(false)
         return
     }
 
-    navigate('/login')
+    try {
+        const res = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+            setError(data.message || 'Registration failed')
+            setLoading(false)
+            return
+        }
+
+        setLoading(false)
+        navigate('/login')
+    } catch (err) {
+        setError('Server not reachable')
+        setLoading(false)
+    }
 }
+
 
 
     return (
@@ -43,6 +70,8 @@ function SignUp() {
                 Sign in
               </span>
             </p>
+            {error && <p className='mb-4 text-red-500 font-semibold'>{error}</p>}
+
                 <form onSubmit={handleSubmit}>
                     <div className='relative mb-4'>
                         <input
@@ -145,9 +174,10 @@ function SignUp() {
                     </div>
                     <button
                         type="submit"
+                        disabled={loading}
                         className='w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition-colors'
                     >
-                        Sign Up
+                        {loading ? 'Creating account...' : 'Create Account'}
                     </button>
                 </form>
             </div>
