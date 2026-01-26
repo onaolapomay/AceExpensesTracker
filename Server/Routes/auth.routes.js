@@ -1,5 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
+const { generateToken } = require('../utils/jwt')
 const fs = require('fs')
 const path = require('path')
 
@@ -28,7 +29,10 @@ function writeUsers(users) {
 
 
 router.post('/register', (req, res) => {
+  console.log('REGISTER BODY: ', req.body)
+
   const { email, password } = req.body
+
   const hashedPassword = bcrypt.hashSync(password, 10)
 
   if (!email || !password) {
@@ -63,7 +67,7 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
-  const { email, password } = req.body
+  const { email, password } = req.body || {}
 
   if (!email || !password) {
     return res.status(400).json({
@@ -72,7 +76,6 @@ router.post('/login', (req, res) => {
   }
 
   const users = readUsers()
-
   const user = users.find(user => user.email === email)
 
   if (!user) {
@@ -89,8 +92,15 @@ router.post('/login', (req, res) => {
     })
   }
 
+
+  const token = generateToken({
+    id: user.id,
+    email: user.email,
+  })
+
   return res.status(200).json({
     message: 'Login successful',
+    token,
     user: {
       id: user.id,
       email: user.email,

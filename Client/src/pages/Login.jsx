@@ -42,8 +42,8 @@ function Login() {
             return
         }
 
-        
-        login(data.user)
+
+        login({user: data.user, token: data.token});
         navigate('/dashboard');
     } catch (err) {
         setError('An error occurred during login');

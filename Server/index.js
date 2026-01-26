@@ -1,5 +1,8 @@
+process.env.JWT_SECRET = 'super_secret_key_change_later'
+
 const express = require('express')
 const cors = require('cors')
+const protectedRoutes = require('./Routes/protected.routes')
 
 const authRoutes = require('./Routes/auth.routes')
 
@@ -15,6 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use('/api/auth', authRoutes)
+
+app.use('/api', protectedRoutes)
 
 app.get('/', (req, res) => {
   res.send('Server is running')
