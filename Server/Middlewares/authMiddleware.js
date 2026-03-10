@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken')
 
-const SECRET = 'super_secret_key_change_later'
 
 function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization
+
+    console.log('AUTH HEADER:', authHeader)
 
     if (!authHeader) {
         return res.status(401).json({ message: 'No token provided' })
@@ -16,6 +17,7 @@ function authMiddleware(req, res, next) {
     }
 
     try {
+        console.log('JWT_SECRET IN MIDDLEWARE:', process.env.JWT_SECRET)
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         req.user = decoded
         next()

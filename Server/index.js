@@ -1,8 +1,12 @@
-process.env.JWT_SECRET = 'super_secret_key_change_later'
+require('dotenv').config()
 
+const connectDB = require('./config/db')
 const express = require('express')
 const cors = require('cors')
+
+
 const protectedRoutes = require('./Routes/protected.routes')
+const expenseRoutes = require('./Routes/expenses.routes')
 
 const authRoutes = require('./Routes/auth.routes')
 
@@ -21,9 +25,13 @@ app.use('/api/auth', authRoutes)
 
 app.use('/api', protectedRoutes)
 
+app.use('/api', expenseRoutes)
+
 app.get('/', (req, res) => {
   res.send('Server is running')
 })
+
+connectDB()
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

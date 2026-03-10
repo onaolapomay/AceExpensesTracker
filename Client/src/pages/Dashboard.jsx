@@ -1,61 +1,108 @@
-import React from 'react'
-import SummaryCards from '../components/Dashboard/SummaryCards'
-import ExpenseList from '../components/Dashboard/ExpenseList'
-
-
-
+import React, { useEffect, useState } from 'react'
+import ExpenseChart from '../components/Dashboard/ExpenseChart'
 
 function Dashboard() {
 
-    return (
-        <div className='min-h-screen flex bg-slate-100'>
+  const [expenses, setExpenses] = useState([])
+  const [loading, setLoading] = useState(true)
 
-            {/* sidebar */}
+  useEffect(() => {
 
-            <aside className='w-64 bg-neutral-800 text-white hidden md:flex flex-col p-6'>
-                <h2 className='text-2xl font-bold mb-6'>Ace Tracker</h2>
+    async function fetchExpenses() {
 
-                <nav className='space-y-4'>
-                    <button className='text-left w-full hover:text-indigo-400 transition'>
-                        Dashboard
-                    </button>
+      const token = localStorage.getItem('token')
 
-                    <button className='text-left w-full hover:text-indigo-400 transition'>
-                        Expenses
-                    </button>
+      const response = await fetch('http://localhost:5000/api/expenses', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
 
-                    <button className='text-left w-full hover:text-indigo-400 transition'>
-                        Add Expenses 
-                    </button>
+      const data = await response.json()
 
-                    <button className='text-left w-full hover:text-indigo-400 transition'>
-                        Setings
-                    </button>
-                </nav>
-            </aside>
+      setExpenses(Array.isArray(data) ? data : [])
+      setLoading(false)
 
+    }
 
-            <div className='flex-1 flex flex-col'>
-                <header className='h-16 bg-white shadow-sm flex items-center justify-between px-6'>
-                    <h1 className='text-xl font-semibold text-slate-800'>Dashboard</h1>
+    fetchExpenses()
 
-                    <div className='text-sm text-slate-600'>
-                        User
-                    </div>
-                </header>
+  }, [])
 
-                <main className='flex-1 p-6'>
-                    <SummaryCards />
-                    <ExpenseList />
+  const totalExpenses = expenses.length
 
-                </main>
+  const totalAmount = expenses.reduce((total, expense) => {
+    return total + expense.amount
+  }, 0)
 
-            </div>
+  const recentExpenses = expenses.slice(0, 5)
 
-            
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  return (
+
+    <div className='space-y-6'>
+
+      <div className='grid md:grid-cols-2 gap-4'>
+
+        <div className='bg-white p-6 rounded-lg shadow'>
+          <p className='text-gray-500'>Total Expenses</p>
+          <h2 className='text-2xl font-bold'>{totalExpenses}</h2>
         </div>
-    )
-}
 
+        <div className='bg-white p-6 rounded-lg shadow'>
+          <p className='text-gray-500'>Total Amount Spent</p>
+          <h2 className='text-2xl font-bold'>
+            ₦{totalAmount.toLocaleString()}
+          </h2>
+        </div>
+
+      </div>
+
+      <ExpenseChart expenses={expenses} />
+
+      <div className='bg-white p-6 rounded-lg shadow'>
+
+        <h2 className='text-lg font-semibold mb-4'>Recent Expenses</h2>
+
+        {recentExpenses.length === 0 ? (
+          <p>No recent expenses</p>
+        ) : (
+          <div className='space-y-3'>
+
+            {recentExpenses.map(expense => (
+
+              <div
+                key={expense._id}
+                className='flex justify-between items-center border-b pb-2'
+              >
+
+                <div>
+                  <p className='font-medium'>{expense.title}</p>
+                  <p className='text-sm text-gray-500'>
+                    {expense.category}
+                  </p>
+                </div>
+
+                <div className='font-semibold text-purple-600'>
+                  ₦{expense.amount.toLocaleString()}
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+        )}
+
+      </div>
+
+    </div>
+
+  )
+
+}
 
 export default Dashboard
