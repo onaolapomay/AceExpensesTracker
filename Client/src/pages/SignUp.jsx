@@ -12,6 +12,8 @@ function SignUp() {
     const [loading, setLoading] = useState(false);
 
 
+    const API_URL = "https://aceexpensestracker.onrender.com"
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
@@ -31,7 +33,7 @@ function SignUp() {
     }
 
     try {
-        const res = await fetch('/api/auth/register', {
+        const res = await fetch(`${API_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
