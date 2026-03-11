@@ -3,8 +3,6 @@ require('dotenv').config()
 const connectDB = require('./config/db')
 const express = require('express')
 const cors = require('cors')
-
-
 const protectedRoutes = require('./Routes/protected.routes')
 const expenseRoutes = require('./Routes/expenses.routes')
 
