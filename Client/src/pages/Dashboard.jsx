@@ -8,11 +8,13 @@ function Dashboard() {
 
   useEffect(() => {
 
+    const API_URL = "https://aceexpensestracker.onrender.com"
+
     async function fetchExpenses() {
 
       const token = localStorage.getItem('token')
 
-      const response = await fetch('http://localhost:5000/api/expenses', {
+      const response = await fetch(`${API_URL}/api/expenses`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

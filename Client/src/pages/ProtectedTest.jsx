@@ -4,9 +4,11 @@ import { authFetch } from '../utils/authFetch'
 function ProtectedTest() {
     const [message, setMessage] = useState('')
 
+    const API_URL = "https://aceexpensestracker.onrender.com"
+
     useEffect(() => {
         async function fetchData() {
-            const res = await authFetch('http://localhost:5000/api/protected')
+            const res = await authFetch(`${API_URL}/api/protected`)
             const data = await res.json()
             setMessage(data.message)
         }

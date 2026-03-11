@@ -16,11 +16,13 @@ function ExpenseList() {
 
   useEffect(() => {
 
+    const API_URL = "https://aceexpensestracker.onrender.com"
+
     async function fetchExpenses() {
 
       const token = localStorage.getItem('token')
 
-      const response = await fetch('http://localhost:5000/api/expenses', {
+      const response = await fetch(`${API_URL}/api/expenses`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -54,11 +56,12 @@ function ExpenseList() {
 
   }
 
+
   async function handleUpdate() {
 
     const token = localStorage.getItem('token')
 
-    const response = await fetch(`http://localhost:5000/api/expenses/${editingExpense}`, {
+    const response = await fetch(`${API_URL}/api/expenses/${editingExpense}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
@@ -77,11 +80,12 @@ function ExpenseList() {
 
   }
 
+
   async function handleDelete() {
 
     const token = localStorage.getItem('token')
 
-    await fetch(`http://localhost:5000/api/expenses/${deleteTarget}`, {
+    await fetch(`${API_URL}/api/expenses/${deleteTarget}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`
