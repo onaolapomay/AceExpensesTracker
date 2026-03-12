@@ -20,7 +20,7 @@ app.use(cors({
   credentials: true
 }))
 
-
+app.options('/api/auth/login', cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
