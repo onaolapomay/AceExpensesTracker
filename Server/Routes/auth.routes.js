@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs')
 const User = require('../Models/users')
 const { generateToken } = require('../utils/jwt')
+const auth = require('../Middlewares/auth')
 
 const router = express.Router()
 
@@ -72,5 +73,39 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' })
   }
 })
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password')
+
+    res.status(200).json({ user })
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+router.put('/update-email', auth, async (req, res) => {
+  try {
+
+    const { email } = req.body
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' })
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { email },
+      { new: true }
+    ).select('-password')
+
+    res.status(200).json({ user })
+
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+
 
 module.exports = router
