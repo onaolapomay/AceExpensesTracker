@@ -27,10 +27,15 @@ function Settings() {
           }
         })
 
+        console.log('USER RESPONSE:', res.data)
+
         setUser(res.data.user)
         setEmail(res.data.user.email)
 
       } catch (err) {
+
+        console.log('ME ERROR:', err.response)
+
         setError('Failed to load user info')
       }
 

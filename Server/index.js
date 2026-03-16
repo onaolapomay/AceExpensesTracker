@@ -6,6 +6,7 @@ const cors = require('cors')
 const protectedRoutes = require('./Routes/protected.routes')
 const expenseRoutes = require('./Routes/expenses.routes')
 
+
 const authRoutes = require('./Routes/auth.routes')
 
 const app = express()
