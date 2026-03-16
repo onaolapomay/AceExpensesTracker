@@ -106,6 +106,32 @@ router.put('/update-email', auth, async (req, res) => {
   }
 })
 
+router.put('/change-password', auth, async (req, res) => {
 
+  try {
+
+    const { currentPassword, newPassword } = req.body
+
+    const user = await User.findById(req.user.id)
+
+    const isMatched = await bcrypt.compare(currentPassword, user.password)
+
+    if (!isMatched) {
+      return res.status(401).json({ message: 'Current password is incorrect' })
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10)
+
+    user.password = hashedPassword
+
+    await user.save()
+
+    res.status(200).json({ message: 'Password updated successfully' })
+
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' })
+  }
+
+})
 
 module.exports = router

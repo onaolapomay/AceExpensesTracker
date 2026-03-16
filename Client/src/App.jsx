@@ -10,6 +10,8 @@ import AddExpenseButton from './pages/AddExpenseButton'
 import Layout from './layout/Layout'
 import ExpenseList from './pages/ExpenseList'
 import ExpenseChart from './components/Dashboard/ExpenseChart'
+import Settings from './pages/Settings'
+
 
 function App() {
   
@@ -29,6 +31,7 @@ function App() {
           <Route path="add-expense" element={<AddExpenseButton /> } />
           <Route path="chart" element={<ExpenseChart />} />
           <Route path="protected-test" element={<ProtectedTest/>} />
+          <Route path="Settings" element={<Settings/>} />
 
         </Route>
 
