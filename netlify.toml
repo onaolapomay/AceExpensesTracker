@@ -1,6 +1,8 @@
+# redeploy trigger
+
 [build]
   base = "client"
-  command = "npm install && npm run build"
+  command = "npm run build"
   publish = "dist"
 
 [[redirects]]
