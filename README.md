@@ -1,16 +1,61 @@
-# React + Vite
+# 💰 Ace Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack expense tracking application that allows users to manage and track their expenses efficiently.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## React Compiler
+Frontend: https://expensesrack.netlify.app  
+Backend: https://aceexpensestracker.onrender.com  
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- User authentication (JWT)
+- Register & Login system
+- Add, edit, and delete expenses
+- Dashboard with expense summary
+- Data visualization (charts)
+- Settings page (update email & password)
+- Protected routes
+- Persistent storage with MongoDB
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- Axios
+
+### Backend
+- Node.js
+- Express
+- MongoDB Atlas
+- JWT Authentication
+- bcrypt
+
+---
+
+## 🔐 Authentication
+
+- Secure login using JWT
+- Password hashing with bcrypt
+- Protected API routes
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/onaolapomay/expenses-tracker.git
+cd expenses-tracker
+
+cd client
+npm install
+
+cd ../server
+npm install
