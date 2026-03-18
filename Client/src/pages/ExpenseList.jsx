@@ -58,13 +58,14 @@ function ExpenseList() {
 
 
   async function handleUpdate() {
+    const API_URL = "https://aceexpensestracker.onrender.com"
 
     const token = localStorage.getItem('token')
 
     const response = await fetch(`${API_URL}/api/expenses/${editingExpense}`, {
       method: 'PUT',
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(form)
@@ -72,7 +73,7 @@ function ExpenseList() {
 
     const updated = await response.json()
 
-    setExpenses(expenses.map(exp =>
+    setExpenses(prev => prev.map(exp =>
       exp._id === editingExpense ? updated : exp
     ))
 
@@ -82,6 +83,7 @@ function ExpenseList() {
 
 
   async function handleDelete() {
+    const API_URL = "https://aceexpensestracker.onrender.com"
 
     const token = localStorage.getItem('token')
 
