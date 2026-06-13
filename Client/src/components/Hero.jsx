@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+
 
 function Hero() {
+    const navigate = useNavigate();
     return (
         <motion.section initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -22,6 +25,7 @@ function Hero() {
                     whileHover={{scale: 1.05 }}
                     whileTap={{scale: 0.95 }}
                     transition={{type: 'spring', stiffness: 400 }}
+                    onClick={() => navigate('/signup')}
                     className='px-6 py-3 rounded-lg bg-black text-white
                     font-medium hover:bg-slate-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black'>
                         Get Started
